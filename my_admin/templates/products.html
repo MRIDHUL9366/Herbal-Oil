@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Herbal Oil Products{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Product List Styling */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .product-image {
+        height: 220px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .product-body {
+        padding: 1.5rem;
+    }
+
+    .product-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #27ae60;
+        margin-bottom: 0.75rem;
+    }
+
+    .product-description {
+        color: #5a6c7d;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+        min-height: 72px;
+    }
+
+    .product-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .stock-info {
+        color: #5a6c7d;
+    }
+
+    .availability {
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+
+    .available {
+        background-color: rgba(39, 174, 96, 0.15);
+        color: #27ae60;
+    }
+
+    .not-available {
+        background-color: rgba(231, 76, 60, 0.15);
+        color: #e74c3c;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .btn-edit {
+        background-color: #3498db;
+        border: none;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: background-color 0.2s;
+        flex: 1;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .btn-edit:hover {
+        background-color: #2980b9;
+        color: white;
+    }
+
+    /* Add Product Button Styling */
+    .btn-add {
+        background-color: #27ae60;
+        border: none;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-add:hover {
+        background-color: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    /* Form Styling */
+    .form-section {
+        background: #fff;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid #e0e6ed;
+        border-radius: 8px;
+        padding: 0.75rem;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 3rem 1rem;
+        color: #7f8c8d;
+    }
+
+    .empty-state-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: #bdc3c7;
+    }
+
+    /* Header Styling */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e0e6ed;
+    }
+
+    .page-title {
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .page-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .btn-add {
+            align-self: stretch;
+            justify-content: center;
+        }
+    }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+
+        .alert-error, .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-left: 5px solid #17a2b8;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+</style>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+     <!-- Display Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    <!-- Header -->
+    <div class="page-header">
+        <h2 class="page-title">Product List</h2>
+        <button id="toggleAddForm" class="btn-add">
+            <i class="fas fa-plus"></i> Add New Product
+        </button>
+    </div>
+
+    <!-- Add Product Form (hidden by default) -->
+    <div id="addFormSection" class="form-section" style="display: none;">
+        <h4 class="mb-4">Add New Product</h4>
+        <form id="productForm" method="POST" enctype="multipart/form-data" action="{% url 'products' %}">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="name">Product Name</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Enter product name" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="price">Price</label>
+                    <input type="number"  id="price" name="price" step="0.01" class="form-control" placeholder="Enter price" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter detailed product description" required></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label" for="Stock">Stock</label>
+                    <input type="number" name="stock" id="Stock" class="form-control" placeholder="Enter stock quantity" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" for="available">Available</label>
+                    <select name="available" class="form-select" id="available">
+                        <option value="True">Yes</option>
+                        <option value="False">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label">Product Image</label>
+                <input type="file" name="image" class="form-control">
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <button type="submit" class="btn btn-success px-4">Save Product</button>
+                <button type="button" id="cancelAddForm" class="btn btn-secondary px-4">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Product List -->
+    <div id="productListSection">
+        {% if products %}
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="product-image" alt="{{ product.name }}">
+                {% else %}
+                    <img src="{% static 'images/default.png' %}" class="product-image" alt="No Image">
+                {% endif %}
+                <div class="product-body">
+                    <h5 class="product-title">{{ product.name }}</h5>
+                    <p class="product-price">₹{{ product.price }}</p>
+                    <p class="product-description">{{ product.description }}</p>
+
+                    <div class="product-meta">
+                        <div class="stock-info">
+                            <strong>Stock:</strong> {{ product.stock }}
+                        </div>
+                        <div class="availability {% if product.available %}available{% else %}not-available{% endif %}">
+                            {{ product.available|yesno:"Available,Not Available" }}
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <a href="{% url 'edit_product' product.id %}" class="btn-edit">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="fas fa-box-open"></i>
+            </div>
+            <h4>No Products Available</h4>
+            <p>Get started by adding your first product to the inventory.</p>
+            <button id="toggleAddFormEmpty" class="btn-add mt-3">
+                <i class="fas fa-plus"></i> Add Your First Product
+            </button>
+        </div>
+        {% endif %}
+    </div>
+
+</div>
+
+<!-- JavaScript to toggle sections -->
+<script>
+    const toggleBtn = document.getElementById('toggleAddForm');
+    const toggleBtnEmpty = document.getElementById('toggleAddFormEmpty');
+    const addFormSection = document.getElementById('addFormSection');
+    const productListSection = document.getElementById('productListSection');
+    const cancelBtn = document.getElementById('cancelAddForm');
+
+    // Toggle form from the main button
+    toggleBtn.addEventListener('click', () => {
+        addFormSection.style.display = 'block';
+        productListSection.style.display = 'none';
+    });
+
+    // Toggle form from the empty state button
+    if (toggleBtnEmpty) {
+        toggleBtnEmpty.addEventListener('click', () => {
+            addFormSection.style.display = 'block';
+            productListSection.style.display = 'none';
+        });
+    }
+
+    // Cancel button functionality
+    cancelBtn.addEventListener('click', () => {
+        addFormSection.style.display = 'none';
+        productListSection.style.display = 'block';
+    });
+</script>
+
+{% endblock %}

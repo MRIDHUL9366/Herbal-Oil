@@ -1,0 +1,170 @@
+  /* Page Header */
+        .page-header {
+            padding: 20px 0;
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: var(--primary-green);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-item a {
+            color: var(--light-green);
+            text-decoration: none;
+        }
+
+        /* Content Cards */
+        .content-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+            transition: transform 0.3s;
+        }
+
+        .content-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 15px 20px;
+            font-weight: 600;
+            color: var(--primary-green);
+        }
+
+        /* Dashboard Cards */
+        .dashboard-card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            opacity: 0.7;
+        }
+
+        .stats-card-1 {
+            background: linear-gradient(45deg, #4caf50, #81c784);
+            color: white;
+        }
+
+        .stats-card-2 {
+            background: linear-gradient(45deg, #66bb6a, #a5d6a7);
+            color: white;
+        }
+
+        .stats-card-3 {
+            background: linear-gradient(45deg, #43a047, #7cb342);
+            color: white;
+        }
+
+        .stats-card-4 {
+            background: linear-gradient(45deg, #388e3c, #689f38);
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            border-color: var(--dark-green);
+        }
+
+        .btn-outline-primary {
+            color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-green);
+            border-color: var(--primary-green);
+        }
+
+        /* Tables */
+        .table th {
+            border-top: none;
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* Forms */
+        .form-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-control:focus {
+            border-color: var(--light-green);
+            box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #sidebar {
+                width: var(--sidebar-collapsed);
+            }
+
+            #sidebar .sidebar-header h3,
+            #sidebar .nav-link-text {
+                display: none;
+            }
+
+            #sidebar .sidebar-header {
+                padding: 20px 10px;
+            }
+
+            #sidebar ul li a {
+                text-align: center;
+                padding: 15px 10px;
+            }
+
+            #sidebar ul li a i {
+                margin-right: 0;
+                font-size: 1.4rem;
+            }
+
+            #content {
+                width: calc(100% - var(--sidebar-collapsed));
+                margin-left: var(--sidebar-collapsed);
+            }
+
+            #sidebar.mobile-expanded {
+                width: var(--sidebar-width);
+            }
+
+            #sidebar.mobile-expanded .sidebar-header h3,
+            #sidebar.mobile-expanded .nav-link-text {
+                display: block;
+            }
+
+            #sidebar.mobile-expanded ul li a {
+                text-align: left;
+                padding: 12px 20px;
+            }
+
+            #sidebar.mobile-expanded ul li a i {
+                margin-right: 10px;
+            }
+        }

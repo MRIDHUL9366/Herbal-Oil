@@ -1,0 +1,435 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Herbal Oil Products
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Page Container */
+    .page-container {
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4efe9 100%);
+    }
+
+    /* Form Container */
+    .form-container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 2.5rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        position: relative;
+    }
+
+    .form-title {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e0e6ed;
+        text-align: center;
+        font-size: 1.75rem;
+    }
+
+    /* Main Content Layout */
+    .form-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2.5rem;
+        align-items: start;
+    }
+
+    /* Image Section */
+    .image-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .image-preview {
+        width: 100%;
+        text-align: center;
+        padding: 1.5rem;
+        border: 1px dashed #e0e6ed;
+        border-radius: 12px;
+        background-color: #f8f9fa;
+    }
+
+    .preview-img {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-upload-area {
+        width: 100%;
+        text-align: center;
+    }
+
+    .upload-label {
+        display: block;
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Form Section */
+    .form-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .form-group.full-width {
+        grid-column: 1 / -1;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 500;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e6ed;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background-color: #fff;
+        box-sizing: border-box;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    select.form-control {
+        cursor: pointer;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235a6c7d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 12px;
+        appearance: none;
+        padding-right: 2.5rem;
+    }
+
+    /* File Input Styling */
+    .file-input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+
+    .file-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #e0e6ed;
+        border-radius: 8px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+    }
+
+    .file-input:hover {
+        border-color: #3498db;
+    }
+
+    .file-input::file-selector-button {
+        padding: 0.5rem 1rem;
+        margin-right: 1rem;
+        border: none;
+        border-radius: 6px;
+        background-color: #3498db;
+        color: white;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .file-input::file-selector-button:hover {
+        background-color: #2980b9;
+    }
+
+    /* Button Styling */
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e0e6ed;
+    }
+
+    .btn {
+        padding: 0.75rem 2rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .btn-submit {
+        background-color: #27ae60;
+        color: white;
+    }
+
+    .btn-submit:hover {
+        background-color: #219653;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+    }
+
+    .btn-cancel {
+        background-color: #95a5a6;
+        color: white;
+    }
+
+    .btn-cancel:hover {
+        background-color: #7f8c8d;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
+    }
+
+    .btn-delete {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color: #c0392b;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(231, 76, 60, 0.3);
+    }
+
+    /* Status Messages */
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .alert-success {
+        background-color: rgba(39, 174, 96, 0.15);
+        color: #27ae60;
+        border: 1px solid rgba(39, 174, 96, 0.3);
+    }
+
+    .alert-error {
+        background-color: rgba(231, 76, 60, 0.15);
+        color: #e74c3c;
+        border: 1px solid rgba(231, 76, 60, 0.3);
+    }
+
+    /* Required Field Indicator */
+    .required::after {
+        content: " *";
+        color: #e74c3c;
+    }
+
+    /* No Image Placeholder */
+    .no-image {
+        color: #7f8c8d;
+        font-style: italic;
+        padding: 2rem;
+        text-align: center;
+        border: 2px dashed #e0e6ed;
+        border-radius: 8px;
+        background-color: #f8f9fa;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .page-container {
+            padding: 1rem;
+            align-items: flex-start;
+        }
+
+        .form-container {
+            padding: 1.5rem;
+        }
+
+        .form-content {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="form-container">
+        <h2 class="form-title">
+            {% if product %}Edit Product{% else %}Add New Product{% endif %}
+        </h2>
+
+        <!-- Display Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+ <form method="POST" enctype="multipart/form-data" class="product-form">
+        <div class="form-content">
+            <!-- Left Side: Image Section -->
+            <div class="image-section">
+                <!-- Current Image Preview -->
+                <div class="image-preview">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="Current Product Image" class="preview-img">
+                        <p class="mt-2">Current Image</p>
+                    {% else %}
+                        <div class="no-image">
+                            <i class="fas fa-image fa-3x mb-2"></i>
+                            <p>No Image Available</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Image Upload -->
+                <div class="image-upload-area">
+                    <label class="upload-label">Upload New Image</label>
+                    <input type="file" name="image" class="form-control file-input" id="image-upload">
+                    {% if product.image %}
+                        <small class="form-text">Leave empty to keep the current image</small>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Right Side: Form Section -->
+            <div class="form-section">
+
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Name</label>
+                            <input type="text" name="name" value="{{ product.name }}" class="form-control" placeholder="Enter product name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label required">Price</label>
+                            <input type="number" name="price" value="{{ product.price }}" step="0.01" class="form-control" placeholder="Enter price" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label required">Description</label>
+                        <textarea name="description" class="form-control" placeholder="Enter detailed product description" required>{{ product.description }}</textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label required">Stock</label>
+                            <input type="number" name="stock" value="{{ product.stock }}" class="form-control" placeholder="Enter stock quantity" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label required">Available</label>
+                            <select name="available" class="form-control">
+                                <option value="True" {% if product.available %}selected{% endif %}>Yes</option>
+                                <option value="False" {% if not product.available %}selected{% endif %}>No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="{% url 'products' %}" class="btn btn-cancel">
+                            <i class="fas fa-arrow-left"></i> Cancel
+                        </a>
+                        {% if product %}
+                        <a href="{% url 'delete_products' product.id %}" class="btn btn-delete">
+                            <i class="fas fa-trash"></i> Delete
+                        </a>
+                        {% endif %}
+                        <button type="submit" class="btn btn-submit">
+                            <i class="fas fa-save"></i> {% if product %}Update Product{% else %}Create Product{% endif %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Image Preview -->
+<script>
+    // Image preview functionality
+    const fileInput = document.getElementById('image-upload');
+
+    if (fileInput) {
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Update the image preview
+                    const imagePreview = document.querySelector('.image-preview');
+                    imagePreview.innerHTML = `
+                        <img src="${e.target.result}" alt="Preview" class="preview-img">
+                        <p class="mt-2">New Image Preview</p>
+                    `;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+</script>
+{% endblock %}

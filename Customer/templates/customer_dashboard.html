@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herbal Harmony - Customer Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d5016;
+            --secondary: #5a8c2e;
+            --accent: #8db851;
+            --light: #f5f9f0;
+            --dark: #1a2e0d;
+            --text: #333333;
+            --text-light: #6b6b6b;
+            --card-bg: #ffffff;
+            --border: #e8f4d9;
+            --bg-color: #f5f9f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.5s ease;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+            width: 200px;
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown.active {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.7rem 0;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            color: var(--primary);
+        }
+
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .icon-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Theme Switcher */
+        .theme-switcher {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+        }
+
+        .theme-option {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-option:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-green {
+            background: linear-gradient(135deg, #2d5016, #5a8c2e);
+        }
+
+        .theme-blue {
+            background: linear-gradient(135deg, #1e3a5f, #4a7bd9);
+        }
+
+        .theme-purple {
+            background: linear-gradient(135deg, #4a235a, #8e44ad);
+        }
+
+        .theme-amber {
+            background: linear-gradient(135deg, #b9770e, #f39c12);
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .welcome-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .welcome-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .welcome-card h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.5s ease;
+        }
+
+        .welcome-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: all 0.5s ease;
+        }
+
+        /* Product Showcase Section */
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .product-image {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 16px;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .product-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path fill="white" d="M28.1,36.9c1.7-0.5,3.4-0.9,5.2-1.1c1.8-0.2,3.6-0.3,5.4-0.2c1.8,0.1,3.6,0.4,5.3,0.9c1.7,0.5,3.4,1.1,5,1.9 c1.6,0.8,3.1,1.7,4.5,2.8c1.4,1.1,2.7,2.3,3.9,3.6c1.2,1.3,2.2,2.7,3.1,4.3c0.9,1.5,1.6,3.2,2.2,4.9c0.6,1.7,1,3.5,1.2,5.3 c0.2,1.8,0.3,3.6,0.2,5.4c-0.1,1.8-0.4,3.6-0.9,5.3c-0.5,1.7-1.1,3.4-1.9,5c-0.8,1.6-1.7,3.1-2.8,4.5c-1.1,1.4-2.3,2.7-3.6,3.9 c-1.3,1.2-2.7,2.2-4.3,3.1c-1.5,0.9-3.2,1.6-4.9,2.2c-1.7,0.6-3.5,1-5.3,1.2c-1.8,0.2-3.6,0.3-5.4,0.2c-1.8-0.1-3.6-0.4-5.3-0.9 c-1.7-0.5-3.4-1.1-5-1.9c-1.6-0.8-3.1-1.7-4.5-2.8c-1.4-1.1-2.7-2.3-3.9-3.6c-1.2-1.3-2.2-2.7-3.1-4.3c-0.9-1.5-1.6-3.2-2.2-4.9 c-0.6-1.7-1-3.5-1.2-5.3c-0.2-1.8-0.3-3.6-0.2-5.4c0.1-1.8,0.4-3.6,0.9-5.3c0.5-1.7,1.1-3.4,1.9-5c0.8-1.6,1.7-3.1,2.8-4.5 c1.1-1.4,2.3-2.7,3.6-3.9c1.3-1.2,2.7-2.2,4.3-3.1C24.9,38.5,26.5,37.5,28.1,36.9z"/></svg>');
+            background-size: 200px;
+            opacity: 0.1;
+        }
+
+        .product-icon {
+            font-size: 10rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .product-details {
+            padding: 2rem 0;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.5s ease;
+        }
+
+        .product-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .product-description {
+            line-height: 1.7;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .product-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-list i {
+            color: var(--accent);
+        }
+
+        .product-purchase {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.5s ease;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            transition: all 0.5s ease;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 80, 22, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            transition: all 0.5s ease;
+        }
+
+        .rating-summary {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .overall-rating {
+            text-align: center;
+            padding-right: 1.5rem;
+            border-right: 1px solid var(--border);
+        }
+
+        .rating-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .rating-stars {
+            color: #FFC107;
+            margin: 0.5rem 0;
+        }
+
+        .rating-count {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .rating-bars {
+            flex: 1;
+        }
+
+        .rating-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+
+        .bar-label {
+            width: 60px;
+            font-size: 0.9rem;
+        }
+
+        .bar-container {
+            flex: 1;
+            height: 8px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: #FFC107;
+            border-radius: 4px;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reviewer-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .reviewer-info h4 {
+            margin-bottom: 0.2rem;
+        }
+
+        .reviewer-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: #FFC107;
+        }
+
+        .review-content {
+            line-height: 1.6;
+            color: var(--text);
+        }
+
+        .review-date {
+            margin-top: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .product-showcase {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-image {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .rating-summary {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .overall-rating {
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding-right: 0;
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .welcome-card h1 {
+                font-size: 2rem;
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .product-purchase {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+
+            .theme-switcher {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="logo-text">Herbal Harmony</div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-clipboard-list"></i> My Orders</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart</a></li>
+                    <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+                    <li class="user-profile" id="userProfile">
+                        <div class="user-avatar">SM</div>
+                        <span>Sarah</span>
+                        <i class="fas fa-chevron-down"></i>
+
+                        <div class="dropdown" id="profileDropdown">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i> My Profile
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-key"></i> Change Password
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-card">
+                <h1>Welcome back, Sarah!</h1>
+                <p>Discover our premium herbal oils for your wellness journey</p>
+                <div class="profile-badge">
+                    <i class="fas fa-crown"></i>
+                    Premium Member
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase -->
+        <section class="product-showcase">
+            <div class="product-image">
+                <i class="fas fa-spa product-icon"></i>
+            </div>
+
+            <div class="product-details">
+                <h1 class="product-title">Lavender Essential Oil</h1>
+                <p class="product-subtitle">Pure therapeutic grade for relaxation and stress relief</p>
+
+                <p class="product-description">
+                    Our premium Lavender Essential Oil is carefully extracted from organically grown lavender flowers. Known for its calming and relaxing properties, this oil is perfect for aromatherapy, massage, and skincare. It helps reduce stress, improve sleep quality, and soothe skin irritations.
+                </p>
+
+                <div class="product-features">
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check"></i> 100% pure and natural</li>
+                        <li><i class="fas fa-check"></i> Cold-pressed extraction</li>
+                        <li><i class="fas fa-check"></i> No additives or fillers</li>
+                        <li><i class="fas fa-check"></i> Suitable for aromatherapy</li>
+                        <li><i class="fas fa-check"></i> Vegan and cruelty-free</li>
+                    </ul>
+                </div>
+
+                <div class="product-purchase">
+                    <div class="product-price">$24.99</div>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-heart"></i> Add to Wishlist
+                    </button>
+                </div>
+
+                <div class="product-meta">
+                    <p><i class="fas fa-box"></i> In stock - Delivery in 2-3 days</p>
+                    <p><i class="fas fa-shield-alt"></i> 30-day money-back guarantee</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section class="reviews-section">
+            <div class="section-header">
+                <h2 class="section-title">Customer Reviews</h2>
+                <button class="btn btn-outline">
+                    <i class="fas fa-pencil-alt"></i> Write a Review
+                </button>
+            </div>
+
+            <div class="rating-summary">
+                <div class="overall-rating">
+                    <div class="rating-value">4.8</div>
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="rating-count">Based on 127 reviews</div>
+                </div>
+
+                <div class="rating-bars">
+                    <div class="rating-bar">
+                        <span class="bar-label">5 stars</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 85%;"></div>
+                        </div>
+                        <span>85%</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="bar-label">4 stars</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 12%;"></div>
+                        </div>
+                        <span>12%</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="bar-label">3 stars</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 2%;"></div>
+                        </div>
+                        <span>2%</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="bar-label">2 stars</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 1%;"></div>
+                        </div>
+                        <span>1%</span>
+                    </div>
+                    <div class="rating-bar">
+                        <span class="bar-label">1 star</span>
+                        <div class="bar-container">
+                            <div class="bar-fill" style="width: 0%;"></div>
+                        </div>
+                        <span>0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reviews-grid">
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">EJ</div>
+                            <div class="reviewer-info">
+                                <h4>Emma Johnson</h4>
+                                <p>Verified Purchase</p>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        This lavender oil has completely transformed my bedtime routine. I add a few drops to my diffuser every night and I'm sleeping better than I have in years. The scent is authentic and not artificial like some other brands I've tried.
+                    </div>
+                    <div class="review-date">Posted on March 12, 2023</div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">MR</div>
+                            <div class="reviewer-info">
+                                <h4>Michael Roberts</h4>
+                                <p>Verified Purchase</p>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        I use this oil for massage therapy sessions with my clients. The quality is exceptional and the aroma is perfectly balanced - not too strong, not too weak. My clients always comment on how relaxing it is.
+                    </div>
+                    <div class="review-date">Posted on February 28, 2023</div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">SC</div>
+                            <div class="reviewer-info">
+                                <h4>Sophia Chen</h4>
+                                <p>Verified Purchase</p>
+                            </div>
+                        </div>
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        I've tried many lavender oils over the years, but this one stands out. The purity is evident from the first whiff. I mix it with a carrier oil for my skincare routine and my skin has never been calmer. Will definitely repurchase!
+                    </div>
+                    <div class="review-date">Posted on April 5, 2023</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <div class="theme-option theme-green" data-theme="green" title="Green Theme">
+            <i class="fas fa-leaf"></i>
+        </div>
+        <div class="theme-option theme-blue" data-theme="blue" title="Blue Theme">
+            <i class="fas fa-tint"></i>
+        </div>
+        <div class="theme-option theme-purple" data-theme="purple" title="Purple Theme">
+            <i class="fas fa-moon"></i>
+        </div>
+        <div class="theme-option theme-amber" data-theme="amber" title="Amber Theme">
+            <i class="fas fa-sun"></i>
+        </div>
+    </div>
+
+    <script>
+        // Toggle profile dropdown
+        document.getElementById('userProfile').addEventListener('click', function() {
+            document.getElementById('profileDropdown').classList.toggle('active');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('profileDropdown');
+            const profile = document.getElementById('userProfile');
+            if (!profile.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Theme switching functionality
+        const themeOptions = document.querySelectorAll('.theme-option');
+
+        themeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const theme = this.getAttribute('data-theme');
+                changeTheme(theme);
+            });
+        });
+
+        function changeTheme(theme) {
+            const root = document.documentElement;
+
+            switch(theme) {
+                case 'green':
+                    // Default green theme
+                    root.style.setProperty('--primary', '#2d5016');
+                    root.style.setProperty('--secondary', '#5a8c2e');
+                    root.style.setProperty('--accent', '#8db851');
+                    root.style.setProperty('--light', '#f5f9f0');
+                    root.style.setProperty('--dark', '#1a2e0d');
+                    root.style.setProperty('--bg-color', '#f5f9f0');
+                    break;
+
+                case 'blue':
+                    // Blue theme
+                    root.style.setProperty('--primary', '#1e3a5f');
+                    root.style.setProperty('--secondary', '#4a7bd9');
+                    root.style.setProperty('--accent', '#6ea1ff');
+                    root.style.setProperty('--light', '#f0f5ff');
+                    root.style.setProperty('--dark', '#0f1f3d');
+                    root.style.setProperty('--bg-color', '#f0f5ff');
+                    break;
+
+                case 'purple':
+                    // Purple theme
+                    root.style.setProperty('--primary', '#4a235a');
+                    root.style.setProperty('--secondary', '#8e44ad');
+                    root.style.setProperty('--accent', '#bb8fce');
+                    root.style.setProperty('--light', '#f8f0fc');
+                    root.style.setProperty('--dark', '#2c1252');
+                    root.style.setProperty('--bg-color', '#f8f0fc');
+                    break;
+
+                case 'amber':
+                    // Amber theme
+                    root.style.setProperty('--primary', '#b9770e');
+                    root.style.setProperty('--secondary', '#f39c12');
+                    root.style.setProperty('--accent', '#f7dc6f');
+                    root.style.setProperty('--light', '#fef9e7');
+                    root.style.setProperty('--dark', '#7e5109');
+                    root.style.setProperty('--bg-color', '#fef9e7');
+                    break;
+            }
+
+            // Save theme preference
+            localStorage.setItem('theme', theme);
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                changeTheme(savedTheme);
+            }
+
+            // Add to cart functionality
+            document.querySelector('.btn-primary').addEventListener('click', function() {
+                alert('Added Lavender Essential Oil to cart!');
+            });
+        });
+    </script>
+</body>
+</html>

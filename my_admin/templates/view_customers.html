@@ -1,0 +1,392 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Herbal Oil Products - Customer Management{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Page Styling */
+    .page-container {
+        min-height: calc(100vh - 120px);
+        padding: 2rem;
+        background: linear-gradient(135deg, #f0f7f4 0%, #e3f2e9 100%);
+    }
+
+    .content-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(46, 125, 50, 0.1);
+        overflow: hidden;
+    }
+
+    /* Header Section */
+    .page-header {
+        padding: 1.5rem 2rem;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        color: white;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .page-subtitle {
+        margin: 0.5rem 0 0;
+        opacity: 0.9;
+    }
+
+    /* Search Section */
+    .search-container {
+        padding: 1.5rem 2rem;
+        background: #f8fdf9;
+        border-bottom: 1px solid #e8f5e9;
+    }
+
+    .search-box {
+        position: relative;
+        max-width: 500px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 2.5rem;
+        border: 1px solid #c8e6c9;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.2s ease;
+        background-color: #f1f8e9;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.15);
+        background-color: white;
+    }
+
+    .search-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #4caf50;
+    }
+
+    /* Table Styling */
+    .table-container {
+        padding: 0;
+        overflow-x: auto;
+    }
+
+    .customers-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .customers-table th {
+        background-color: #e8f5e9;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #2e7d32;
+        border-bottom: 2px solid #c8e6c9;
+    }
+
+    .customers-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #e8f5e9;
+        vertical-align: middle;
+    }
+
+    .customers-table tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+    .customers-table tbody tr:hover {
+        background-color: #f1f8e9;
+    }
+
+    /* Gender Badges with Green Pattern */
+    .gender-badge {
+        padding: 0.4rem 0.8rem;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .gender-male {
+        background-color: rgba(76, 175, 80, 0.15);
+        color: #2e7d32;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+    }
+
+    .gender-female {
+        background-color: rgba(104, 159, 56, 0.15);
+        color: #33691e;
+        border: 1px solid rgba(104, 159, 56, 0.3);
+    }
+
+    .gender-other {
+        background-color: rgba(156, 204, 101, 0.15);
+        color: #558b2f;
+        border: 1px solid rgba(156, 204, 101, 0.3);
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .btn-delete {
+        background-color: rgba(244, 67, 54, 0.1);
+        color: #d32f2f;
+        border: 1px solid rgba(244, 67, 54, 0.2);
+    }
+
+    .btn-delete:hover {
+        background-color: #d32f2f;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(211, 47, 47, 0.3);
+    }
+
+    /* Customer Info */
+    .customer-info {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .customer-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+
+    .customer-name {
+        font-weight: 500;
+        color: #2e7d32;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #7cb342;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.7;
+    }
+
+    .empty-state h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #2e7d32;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .page-container {
+            padding: 1rem;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .customers-table {
+            font-size: 0.875rem;
+        }
+
+        .customers-table th,
+        .customers-table td {
+            padding: 0.75rem 0.5rem;
+        }
+    }
+        .alert {
+        padding: 12px 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-left: 5px solid #28a745;
+    }
+
+    .alert-error, .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-left: 5px solid #dc3545;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-left: 5px solid #17a2b8;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border-left: 5px solid #ffc107;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="content-container">
+        <!-- Display Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Customer Management</h1>
+            <p class="page-subtitle">View and manage all customer information</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" id="customerSearch" placeholder="Search customers by name, email, or phone...">
+            </div>
+        </div>
+
+        <!-- Customers Table -->
+        <div class="table-container">
+            <table class="customers-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="customerTableBody">
+                    <!-- Customer 1 -->
+                    {% for cus in customers %}
+                    <tr>
+                        <td>
+                            <div class="customer-info">
+                                <div class="customer-name">{{ cus.user.first_name}}</div>
+                            </div>
+                        </td>
+                        <td>32</td>
+                        <td>
+                            <span class="gender-badge gender-male">{{ cus.age }}</span>
+                        </td>
+                        <td>{{ cus.gender}}</td>
+                        <td>{{ cus.user.email }}</td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn btn-delete" onclick="confirmDelete('{% url 'delete_customer' cus.user.id %}')">
+                                    Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                   {% endfor %}
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for Search and Delete Functionality -->
+<script>
+    // Search functionality
+    document.getElementById('customerSearch').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#customerTableBody tr');
+        let hasVisibleRows = false;
+
+        rows.forEach(row => {
+            const name = row.querySelector('.customer-name').textContent.toLowerCase();
+            const email = row.cells[4].textContent.toLowerCase();
+            const mobile = row.cells[3].textContent.toLowerCase();
+
+            if (name.includes(searchTerm) || email.includes(searchTerm) || mobile.includes(searchTerm)) {
+                row.style.display = '';
+                hasVisibleRows = true;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Show message if no results
+        const existingMessage = document.getElementById('noResultsMessage');
+        if (!hasVisibleRows) {
+            if (!existingMessage) {
+                const messageRow = document.createElement('tr');
+                messageRow.id = 'noResultsMessage';
+                messageRow.innerHTML = `
+                    <td colspan="6" style="text-align: center; padding: 2rem; color: #7cb342;">
+                        <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
+                        <h3>No customers found</h3>
+                        <p>Try adjusting your search terms</p>
+                    </td>
+                `;
+                document.getElementById('customerTableBody').appendChild(messageRow);
+            }
+        } else if (existingMessage) {
+            existingMessage.remove();
+        }
+    });
+
+    // delete button section
+    function confirmDelete(url) {
+    if (confirm("Are you sure you want to delete this customer?")) {
+                window.location.href = url;
+            }
+        }
+
+</script>
+{% endblock %}

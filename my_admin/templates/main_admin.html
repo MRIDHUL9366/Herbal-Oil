@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/admin_home.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">Dashboard Overview</h2>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <div class="card dashboard-card stats-card-1">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>1,254</h4>
+                        <p>Total Orders</p>
+                    </div>
+                    <div class="card-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card dashboard-card stats-card-2">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>542</h4>
+                        <p>New Customers</p>
+                    </div>
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card dashboard-card stats-card-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>$12,458</h4>
+                        <p>Total Revenue</p>
+                    </div>
+                    <div class="card-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card dashboard-card stats-card-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h4>32</h4>
+                        <p>Pending Orders</p>
+                    </div>
+                    <div class="card-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts and Tables -->
+<div class="row mt-4">
+    <div class="col-lg-8">
+        <div class="card dashboard-card">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0">Sales Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-placeholder" style="height: 300px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                    <p class="text-muted">Sales Chart Visualization</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card dashboard-card">
+            <div class="card-header bg-white">
+                <h5 class="card-title mb-0">Recent Orders</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="mb-0">#ORD-1256</h6>
+                            <small class="text-muted">John Doe - 2 items</small>
+                        </div>
+                        <span class="badge bg-success">Completed</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="mb-0">#ORD-1255</h6>
+                            <small class="text-muted">Jane Smith - 1 item</small>
+                        </div>
+                        <span class="badge bg-warning">Pending</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="mb-0">#ORD-1254</h6>
+                            <small class="text-muted">Robert Johnson - 3 items</small>
+                        </div>
+                        <span class="badge bg-success">Completed</span>
+                    </div>
+                    <div class="list-group-item d-flex justify-content-between align-items-center px-0">
+                        <div>
+                            <h6 class="mb-0">#ORD-1253</h6>
+                            <small class="text-muted">Sarah Williams - 2 items</small>
+                        </div>
+                        <span class="badge bg-danger">Cancelled</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Products Table -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card dashboard-card">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Popular Products</h5>
+                <button class="btn btn-sm btn-success">View All</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Sales</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lavender Essential Oil</td>
+                                <td>Aromatherapy</td>
+                                <td>$24.99</td>
+                                <td>156</td>
+                                <td>342</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tea Tree Oil</td>
+                                <td>Skin Care</td>
+                                <td>$19.99</td>
+                                <td>89</td>
+                                <td>278</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Eucalyptus Oil</td>
+                                <td>Respiratory</td>
+                                <td>$22.50</td>
+                                <td>124</td>
+                                <td>195</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Peppermint Oil</td>
+                                <td>Digestive</td>
+                                <td>$26.75</td>
+                                <td>67</td>
+                                <td>183</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

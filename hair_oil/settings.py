@@ -128,3 +128,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Razorpay
+RAZORPAY_KEY_ID='rzp_test_RclNhzqOn4v7EZ'
+RAZORPAY_KEY_SECRET='M8r8lCyaEO27GGrJqP81VkWQ'
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = 'singularissoftware422025@gmail.com'       # Your email
+EMAIL_HOST_PASSWORD = 'jbga oxyj gpem bvyg'     # App password (NOT normal password)
+
+#https://myaccount.google.com/security url for searching

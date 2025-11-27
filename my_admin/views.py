@@ -5,7 +5,7 @@ from my_admin.models import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-
+from Customer.models import Bookings
 
 
 def home(request):
@@ -87,6 +87,7 @@ def admin_home(request):
 
 
 def products(request):
+
     products=Product.objects.all()
 
     if request.method == "POST":
@@ -151,3 +152,10 @@ def delete_customer(request,pk):
     messages.error(request, "Customer Deleted Successfully")
     return redirect("view_customers")
 
+
+
+"""-------------------------Booking_order_management------------------------------"""
+
+def customer_orders(request):
+    customer_orders=Bookings.objects.all().order_by('booked_at')
+    return render(request,"customer_orders.html",{"customer_orders":customer_orders})

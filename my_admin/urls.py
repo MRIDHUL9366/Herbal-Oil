@@ -15,5 +15,7 @@ urlpatterns = [
     #-------------------Customer-----------------------------------#
     path('view_customers', views.view_customers, name='view_customers'),
     path('delete_customer/<int:pk>/', views.delete_customer, name='delete_customer'),
+    # ----------------------------Booking--------------------------------------
+    path('customer_orders', views.customer_orders, name='customer_orders'),
 
 ]

@@ -206,7 +206,7 @@
                 </a>
             </li>
             <li class="{% if 'orders' in request.path %}active{% endif %}">
-                <a href="/orders">
+                <a href="{% url 'customer_orders' %}">
                     <i class="fas fa-shopping-cart"></i>
                     <span class="nav-link-text">Orders</span>
                 </a>

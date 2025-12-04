@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Himalaya Herbal Oil - Pure Nature in Every Drop</title>
+    <title>Himalaya Herbal Oil - Pure Nature</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Global Styles */
+        /* --- Reset & Variables --- */
         * {
             margin: 0;
             padding: 0;
@@ -16,285 +17,341 @@
         }
 
         :root {
-            --primary-color: #2e7d32;
-            --secondary-color: #7cb342;
-            --accent-color: #c5e1a5;
-            --text-color: #333;
-            --light-color: #f9f9f9;
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --secondary: #81c784;
+            --accent: #e8f5e9;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 12px;
         }
 
         body {
-            color: var(--text-color);
-            background-color: var(--light-color);
+            background-color: #fafafa;
+            color: var(--text);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* --- Layout Utility --- */
         .container {
-            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
+        section {
+            padding: 80px 0;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- Typography --- */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* --- Buttons --- */
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
-            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-align: center;
         }
 
         .btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(46, 125, 50, 0.4);
         }
 
-        /* Header Styles */
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Header --- */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
         }
 
-        .header-container {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            width: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
+            text-decoration: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .logo img {
-            height: 50px;
-        }
-
-        .logo h1 {
+        .logo i {
+            margin-right: 8px;
             font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-left: 10px;
         }
 
-        nav ul {
+        .nav-links {
             display: flex;
+            align-items: center;
+            gap: 30px;
             list-style: none;
         }
 
-        nav ul li {
-            margin-left: 25px;
-        }
-
-        nav ul li a {
+        .nav-links a:not(.btn) {
             text-decoration: none;
-            color: var(--text-color);
+            color: var(--text);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--primary-color);
+        .nav-links a:not(.btn):hover {
+            color: var(--primary);
         }
 
-        /* Hero Section */
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        /* --- Hero Section --- */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1603665274855-b6a975b7d3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80');
+            /* REPLACED IMAGE URL HERE */
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            color: white;
-            padding: 100px 0;
+            color: var(--white);
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .hero h2 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 35px auto;
+            opacity: 0.95;
         }
 
-        /* Products Section */
-        .products {
-            padding: 80px 0;
+        /* --- Products Grid --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .card-img-wrapper {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
             text-align: center;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+        .card-body h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text);
         }
 
-        .section-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            color: #666;
+        .card-body p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            flex-grow: 1; /* Pushes button to bottom */
         }
 
-        .product-grid {
+        /* Fixed Button Alignment in Card */
+        .card-body .btn {
+            margin-top: auto; /* Ensures button sticks to bottom */
+            align-self: center; /* Centers button horizontally */
+            min-width: 150px;
+        }
+
+        /* --- Split Section (Ingredients) --- */
+        .feature-split {
+            background-color: var(--accent);
+            padding: 100px 0;
+        }
+
+        .split-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        .product-card {
-            background-color: white;
-            border-radius: 8px;
+        .feature-img {
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            box-shadow: var(--shadow);
+            height: 450px;
         }
 
-        .product-card:hover {
-            transform: translateY(-10px);
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .product-img {
-            height: 250px;
-            background-color: var(--accent-color);
-            display: flex;
+        .feature-text h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .feature-text p {
+            margin-bottom: 25px;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        /* --- Benefits --- */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .benefit-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            background: var(--accent);
+            padding: 15px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
         }
 
-        .product-img i {
-            font-size: 5rem;
-            color: var(--primary-color);
-        }
-
-        .product-info {
-            padding: 20px;
-        }
-
-        .product-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
-
-        .product-info p {
-            margin-bottom: 15px;
-        }
-
-        /* Herbal Image Section */
-
-        .herbal-image {
-            padding: 80px 0;
-            background: linear-gradient(to right, #f9f9f9, #e8f5e9);
-        }
-
-        .image-content {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .image-content div {
-            flex: 1;
-            min-width: 300px;
-
-        }
-
-        .image-content img {
-            width: 80%;
-            border-radius: 19px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .image-content h2 {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .image-content p {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
-        /* Benefits Section */
-        .benefits {
-            padding: 80px 0;
-            background-color: white;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .benefit-card {
-            text-align: center;
-            padding: 30px;
-            border-radius: 8px;
-            background-color: var(--light-color);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-
-        .benefit-card i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .benefit-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        /* Footer */
+        /* --- Footer --- */
         footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 60px 0 30px;
+            background-color: var(--primary-dark);
+            color: #eee;
+            padding: 70px 0 20px;
         }
 
-        .footer-container {
+        .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
             gap: 40px;
+            margin-bottom: 50px;
         }
 
         .footer-col h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: var(--secondary-color);
-        }
-
-        .footer-col p {
-            margin-bottom: 15px;
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.2rem;
         }
 
         .footer-col ul {
@@ -302,248 +359,234 @@
         }
 
         .footer-col ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
-        .footer-col ul li a {
-            color: #ddd;
+        .footer-col a {
+            color: #ccc;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
-        .footer-col ul li a:hover {
-            color: white;
+        .footer-col a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
         }
 
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-icons a {
+        .social-links a {
             display: inline-flex;
-            align-items: center;
-            justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
+            margin-right: 10px;
+            transition: 0.3s;
         }
 
-        .social-icons a:hover {
-            background-color: var(--secondary-color);
+        .social-links a:hover {
+            background: var(--secondary);
             transform: translateY(-3px);
         }
 
         .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
             text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
         }
 
-        /* Responsive Design */
+        /* =========================================
+           MOBILE RESPONSIVENESS
+           ========================================= */
+
         @media (max-width: 992px) {
-            .header-container {
-                flex-direction: column;
+            .split-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
+            .feature-img {
+                order: -1; /* Image on top */
+                height: 350px;
             }
 
-            nav ul li {
-                margin: 5px 10px;
-            }
-
-            .hero h2 {
-                font-size: 2.5rem;
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .hero h2 {
-                font-size: 2rem;
-            }
+            section { padding: 60px 0; }
+            .hero h2 { font-size: 2.5rem; }
+            .section-header h2 { font-size: 2rem; }
 
-            .section-title {
-                font-size: 2rem;
-            }
+            /* Mobile Menu */
+            .hamburger { display: block; z-index: 1001; }
 
-            .image-content {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: var(--white);
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: 0.4s ease;
+                z-index: 1000;
             }
+
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 15px 0; }
+
+            .hero {
+                min-height: 60vh;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links { justify-content: center; }
         }
 
-        @media (max-width: 576px) {
-            .hero {
-                padding: 60px 0;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .btn {
-                padding: 10px 20px;
-            }
-
-            .product-img {
-                height: 200px;
-            }
+        @media (max-width: 480px) {
+            .hero h2 { font-size: 2rem; }
+            .btn { width: 100%; display: block; margin-top: 10px; }
+            .nav-links .btn { width: auto; display: inline-block; } /* Keep nav btn normal */
         }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
+
+    <!-- Header -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--primary-color);"></i>
-                <h1>Himalaya Herbal Oil</h1>
+        <div class="container navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i> Himalaya
+            </a>
+
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
             </div>
 
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Benefits</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="auth-buttons">
-                <a href="{% url 'Booking_page' %}" class="btn">Book Now</a>
-            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Ingredients</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="{% url 'Booking_page' %}" class="btn">Book Now</a></li>
+            </ul>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container hero-content">
-            <h2>Pure Himalayan Herbs for Natural Wellness</h2>
-            <p>Discover the healing power of nature with our authentic herbal oils, crafted from the pristine herbs of the Himalayas.</p>
-            <a href="#booking" class="btn">Book Now</a>
+        <div class="container">
+            <h2>Himalayan Purity in Every Drop</h2>
+            <p>Authentic Ayurvedic oils sourced from the wild peaks of the Himalayas to rejuvenate your mind, body, and soul.</p>
+            <a href="#products" class="btn">Shop Collection</a>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section class="products">
+    <!-- Products -->
+    <section id="products">
         <div class="container">
-            <h2 class="section-title">Our Products</h2>
-            <p class="section-subtitle">Crafted with care for your well-being</p>
+            <div class="section-header">
+                <h2>Our Signature Blends</h2>
+                <p>Small-batch handcrafted oils for holistic wellness</p>
+            </div>
 
-            <div class="product-grid">
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-oil-can"></i>
+            <div class="grid-container">
+                <!-- Card 1 (REPLACED PLACEHOLDER WITH WORKING URL) -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pain Relief Oil">
                     </div>
-                    <div class="product-info">
-                        <h3>Herbal Massage Oil</h3>
-                        <p>Relieve muscle tension and improve circulation with our therapeutic massage oil.</p>
-                        <a href="#booking" class="btn">Book Now</a>
+                    <div class="card-body">
+                        <h3>Deep Joint Relief</h3>
+                        <p>Infused with Wintergreen and Eucalyptus to melt away tension and stiffness.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
 
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-spa"></i>
+                <!-- Card 2 (REPLACED PLACEHOLDER WITH WORKING URL) -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1636737249734-f180af754ab8?fm=jpg&q=60&w=3000" alt="Calming Aromatherapy Oil">
                     </div>
-                    <div class="product-info">
-                        <h3>Aromatherapy Blend</h3>
-                        <p>Experience the calming effects of essential oils from Himalayan flowers and herbs.</p>
-                        <a href="#booking" class="btn">Book Now</a>
+                    <div class="card-body">
+                        <h3>Tranquility Blend</h3>
+                        <p>A soothing mix of Lavender and Chamomile to calm the mind and aid sleep.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
 
-                <div class="product-card">
-                    <div class="product-img">
-                        <i class="fas fa-seedling"></i>
+                <!-- Card 3 (REPLACED PLACEHOLDER WITH WORKING URL) -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <img src="https://plus.unsplash.com/premium_photo-1661445028970-80e9ee083355?fm=jpg&q=60&w=3000" alt="Hair Oil">
                     </div>
-                    <div class="product-info">
-                        <h3>Hair Care Elixir</h3>
-                        <p>Nourish your hair and scalp with our special blend of herbal oils for hair growth.</p>
-                        <a href="#booking" class="btn">Book Now</a>
+                    <div class="card-body">
+                        <h3>Forest Hair Vitalizer</h3>
+                        <p>Rich Bhringraj oil to strengthen roots and restore natural shine.</p>
+                        <a href="#" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Herbal Image Section -->
-    <section class="herbal-image">
-        <div class="container">
-            <div class="image-content">
-                <div class="user-image" >
-                    <img src="{% static 'images/pexels-secret-spells-2150924742-31401743.jpg'%}" alt="Himalayan Herbal Ingredients">
-                </div>
-                <div>
-                    <h2>Pure Himalayan Ingredients</h2>
-                    <p>Our herbal oils are crafted from the finest ingredients sourced directly from the Himalayas. The unique climate and pristine environment of the Himalayan region produce herbs with exceptional therapeutic properties.</p>
-                    <p>Each bottle of Himalaya Herbal Oil contains a blend of rare herbs that have been used for centuries in traditional Ayurvedic medicine for their healing and rejuvenating properties.</p>
-                    <a href="#booking" class="btn">Book a Consultation</a>
-                </div>
+    <!-- Ingredients Split Section -->
+    <section class="feature-split">
+        <div class="container split-container">
+            <div class="feature-img">
+                <!-- REPLACED STATIC IMAGE WITH WORKING URL -->
+                <img src="{% static 'images/pexels-secret-spells-2150924742-31401743.jpg' %}" alt="Fresh Herbs">
+            </div>
+            <div class="feature-text">
+                <h2>Nature's Potent Ingredients</h2>
+                <p>Our commitment to purity starts at the source. We work directly with local farmers in the upper Himalayan ranges to harvest wild herbs at their peak potency.</p>
+                <p>Every bottle is free from mineral oils, synthetic fragrances, and parabens. Just 100% natural plant wisdom, bottled for you.</p>
+                <a href="#" class="btn">Our Sourcing Story</a>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits">
+    <!-- Benefits -->
+    <section>
         <div class="container">
-            <h2 class="section-title">Why Choose Himalaya Herbal Oil?</h2>
-            <p class="section-subtitle">Experience the difference of authentic Himalayan herbs</p>
-
+            <div class="section-header">
+                <h2>Why Choose Himalaya?</h2>
+            </div>
             <div class="benefits-grid">
                 <div class="benefit-card">
                     <i class="fas fa-leaf"></i>
                     <h3>100% Natural</h3>
-                    <p>Our oils are made from pure, natural ingredients with no artificial additives.</p>
+                    <p>No artificial additives or preservatives.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <i class="fas fa-heart"></i>
-                    <h3>Therapeutic Benefits</h3>
-                    <p>Experience the healing properties of herbs known for centuries in Ayurveda.</p>
+                    <i class="fas fa-flask"></i>
+                    <h3>Lab Tested</h3>
+                    <p>Rigorous testing for purity and safety.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <i class="fas fa-recycle"></i>
-                    <h3>Sustainable Sourcing</h3>
-                    <p>We ethically source our herbs supporting local Himalayan communities.</p>
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Cruelty Free</h3>
+                    <p>Never tested on animals.</p>
                 </div>
-
                 <div class="benefit-card">
-                    <i class="fas fa-award"></i>
-                    <h3>Quality Guaranteed</h3>
-                    <p>Each batch is rigorously tested to ensure the highest quality standards.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Section -->
-    <section id="booking" class="herbal-image" style="background: linear-gradient(to right, #e8f5e9, #f9f9f9);">
-        <div class="container">
-            <h2 class="section-title">Book Your Consultation</h2>
-            <p class="section-subtitle">Let our experts help you choose the right herbal oil for your needs</p>
-
-            <div class="image-content">
-                <div>
-                    <h2>Personalized Ayurvedic Consultation</h2>
-                    <p>Our certified Ayurvedic practitioners will assess your unique body type and health needs to recommend the perfect herbal oil blend for you.</p>
-                    <p>During the consultation, we'll discuss your health goals, lifestyle, and preferences to create a personalized wellness plan featuring our Himalaya Herbal Oils.</p>
-                    <p>Book now to experience the transformative power of Himalayan herbs tailored specifically for you.</p>
+                    <i class="fas fa-globe-asia"></i>
+                    <h3>Ethical</h3>
+                    <p>Supporting local farming communities.</p>
                 </div>
             </div>
         </div>
@@ -551,40 +594,72 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container footer-container">
+        <div class="container footer-grid">
             <div class="footer-col">
-                <h3>Himalaya Herbal Oil</h3>
-                <p>Bringing the ancient wisdom of Himalayan herbs to your wellness routine.</p>
-                <div class="social-icons">
-                    <a href=""><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
+                <a href="#" class="logo" style="color:white; margin-bottom: 15px; display:inline-block;">
+                    <i class="fas fa-leaf"></i> Himalaya
+                </a>
+                <p style="color: #aaa; font-size: 0.9rem;">Restoring balance through ancient wisdom.</p>
             </div>
-
             <div class="footer-col">
-                <h3>Quick Links</h3>
+                <h3>Shop</h3>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Benefits</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">All Products</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
-                <h3>Contact Us</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Herbal Way, Dehradun, India</p>
-                <p><i class="fas fa-phone"></i> +91 9876543210</p>
-                <p><i class="fas fa-envelope"></i> info@himalayaherbaloil.com</p>
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
             </div>
         </div>
-
         <div class="copyright">
             <p>&copy; 2023 Himalaya Herbal Oil. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const icon = hamburger.querySelector('i');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+
+            if (navLinks.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                body.style.overflow = 'auto';
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                body.style.overflow = 'auto';
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    </script>
 </body>
 </html>

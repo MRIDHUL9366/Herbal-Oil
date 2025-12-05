@@ -40,8 +40,11 @@
             overflow: hidden;
             display: flex;
             flex-direction: row;
+            /* Default desktop height */
+            min-height: 600px;
         }
 
+        /* --- Welcome Section --- */
         .welcome-section {
             flex: 1;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
@@ -92,18 +95,24 @@
             z-index: 1;
         }
 
+        /* --- Form Section --- */
         .form-section {
             flex: 1;
             padding: 40px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
         }
 
         .form-container {
             width: 100%;
             position: relative;
-            height: 500px;
-            overflow: hidden;
+            /* Height is handled differently on mobile vs desktop */
+            height: 100%;
+            min-height: 450px;
         }
 
+        /* --- Toggles --- */
         .form-toggle {
             display: flex;
             margin-bottom: 30px;
@@ -142,19 +151,33 @@
             transition: all 0.3s ease;
         }
 
+        /* --- Form Elements --- */
         .form {
-            position: absolute;
             width: 100%;
             transition: all 0.5s ease;
-            opacity: 0;
-            transform: translateX(50px);
-            visibility: hidden;
         }
 
-        .form.active {
-            opacity: 1;
-            transform: translateX(0);
-            visibility: visible;
+        /* DESKTOP ANIMATION STYLES */
+        @media (min-width: 769px) {
+            .form {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                transform: translateX(50px);
+                visibility: hidden;
+            }
+            .form.active {
+                opacity: 1;
+                transform: translateX(0);
+                visibility: visible;
+            }
+            .register-form-container {
+                /* Internal scroll for desktop only to keep design alignment */
+                max-height: 400px;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
         }
 
         .form-title {
@@ -181,33 +204,17 @@
             color: var(--dark);
         }
 
-        .form-input {
+        .form-input, .form-select {
             width: 100%;
             padding: 12px 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
+            background-color: #fff;
         }
 
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(74, 140, 90, 0.2);
-            outline: none;
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            background-color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .form-select:focus {
+        .form-input:focus, .form-select:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(74, 140, 90, 0.2);
             outline: none;
@@ -281,13 +288,8 @@
             background-color: #ddd;
         }
 
-        .social-login p::before {
-            left: 0;
-        }
-
-        .social-login p::after {
-            right: 0;
-        }
+        .social-login p::before { left: 0; }
+        .social-login p::after { right: 0; }
 
         .social-icons {
             display: flex;
@@ -314,111 +316,115 @@
             transform: translateY(-3px);
         }
 
-        /* Registration form with scrolling */
-        .register-form-container {
-            max-height: 350px;
-            overflow-y: auto;
-            padding-right: 10px;
-            margin-bottom: 20px;
-        }
-
+        /* Scrollbar Styling */
         .register-form-container::-webkit-scrollbar {
             width: 6px;
         }
-
         .register-form-container::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
         }
-
         .register-form-container::-webkit-scrollbar-thumb {
             background: var(--primary);
             border-radius: 10px;
         }
 
-        .register-form-container::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+        /* Alerts */
+        .alert {
+            padding: 12px 18px;
+            margin: 10px 0;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .alert-success { background-color: #28a745; }
+        .alert-error { background-color: #dc3545; }
+        .alert-warning { background-color: #ffc107; color: #000; }
+        .alert-info { background-color: #17a2b8; }
+        .mt-2 { margin-top: 8px; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- MOBILE RESPONSIVE TWEAKS --- */
         @media (max-width: 768px) {
+            body {
+                align-items: flex-start; /* Allows scrolling on small screens */
+                padding: 10px;
+            }
+
             .container {
                 flex-direction: column;
+                height: auto;
+                min-height: auto;
+                overflow: visible; /* Let content overflow naturally */
             }
 
             .welcome-section {
-                padding: 30px 20px;
+                padding: 20px;
+                flex: 0 0 auto;
+                min-height: auto;
+            }
+
+            /* Hide heavy visual elements on mobile to save space */
+            .welcome-image,
+            .welcome-section p {
+                display: none;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0;
             }
 
             .form-section {
-                padding: 30px 20px;
+                padding: 25px 20px;
             }
 
             .form-container {
-                height: auto;
+                height: auto; /* Remove fixed height */
+                overflow: visible;
             }
 
+            /* Remove absolute sliding on mobile, switch to display block/none */
             .form {
                 position: relative;
-                margin-bottom: 30px;
+                opacity: 1;
+                transform: none;
+                display: none; /* Hidden by default */
+                visibility: visible;
             }
 
             .form.active {
-                position: relative;
+                display: block; /* Show when active */
+                animation: fadeIn 0.4s ease-in-out;
             }
 
+            /* Remove internal scrollbar on mobile, let page scroll */
             .register-form-container {
                 max-height: none;
                 overflow-y: visible;
+                padding-right: 0;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .form-toggle {
+                margin-bottom: 20px;
             }
         }
-         /* Base alert style */
-.alert {
-  padding: 12px 18px;
-  margin: 10px 0;
-  border-radius: 6px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-/* Message type colors */
-.alert-success {
-  background-color: #28a745; /* Green */
-}
-
-.alert-error {
-  background-color: #dc3545; /* Red */
-}
-
-.alert-warning {
-  background-color: #ffc107; /* Yellow */
-  color: #000;
-}
-
-.alert-info {
-  background-color: #17a2b8; /* Blue */
-}
-
-/* Optional margin top */
-.mt-2 {
-  margin-top: 8px;
-}
-
-/* Smooth fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-5px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
     </style>
 </head>
 <body>
     <div class="container">
         <div class="welcome-section">
-            <h1>Welcome to Herbal Oil Booking</h1>
+            <h1>Herbal Oil Booking</h1>
             <p>Discover the healing power of nature with our premium herbal oils. Book your favorite oils with ease and enjoy natural wellness.</p>
             <div class="welcome-image">
                 <svg width="280" height="220" viewBox="0 0 280 220" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -436,13 +442,14 @@
 
         <div class="form-section">
 
- {% if messages %}
+            {% if messages %}
               {% for message in messages %}
                 <div class="alert alert-{{ message.tags }} mt-2" role="alert">
                   {{ message }}
                 </div>
               {% endfor %}
             {% endif %}
+
             <div class="form-toggle">
                 <div class="toggle-bg"></div>
                 <button class="toggle-btn active" id="login-toggle">Login</button>
@@ -590,10 +597,6 @@
                 registerForm.classList.add('active');
                 loginForm.classList.remove('active');
             });
-
-
-
-
         });
     </script>
 </body>

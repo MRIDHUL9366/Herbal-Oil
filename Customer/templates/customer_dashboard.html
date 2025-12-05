@@ -49,7 +49,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             transition: all 0.5s ease;
         }
 
@@ -57,6 +57,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
 
         .logo {
@@ -82,6 +83,7 @@
             font-size: 1.5rem;
         }
 
+        /* Desktop Navigation */
         .nav-links {
             display: flex;
             list-style: none;
@@ -103,6 +105,135 @@
 
         .nav-links a:hover, .nav-links a.active {
             background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            padding: 5rem 1.5rem 2rem;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover, .mobile-nav-links a.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mobile-user-profile {
+            padding: 1.5rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 1rem;
+        }
+
+        .mobile-user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .mobile-user-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .mobile-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.8rem 1rem;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         .user-profile {
@@ -277,6 +408,7 @@
             font-size: 1.1rem;
             color: var(--text-light);
             margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
         .profile-badge {
@@ -296,7 +428,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
-            margin-bottom: 2rem; /* Reduced margin */
+            margin-bottom: 2rem;
+            align-items: center;
         }
 
         .product-image {
@@ -340,12 +473,14 @@
             color: var(--primary);
             margin-bottom: 1rem;
             transition: all 0.5s ease;
+            line-height: 1.2;
         }
 
         .product-subtitle {
             font-size: 1.2rem;
             color: var(--text-light);
             margin-bottom: 1.5rem;
+            line-height: 1.4;
         }
 
         .product-description {
@@ -367,10 +502,12 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 0.8rem;
+            font-size: 0.95rem;
         }
 
         .feature-list i {
             color: var(--accent);
+            min-width: 20px;
         }
 
         .product-purchase {
@@ -378,6 +515,7 @@
             align-items: center;
             gap: 1.5rem;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .product-price {
@@ -398,6 +536,8 @@
             align-items: center;
             gap: 8px;
             font-size: 1rem;
+            text-align: center;
+            justify-content: center;
         }
 
         .btn-primary {
@@ -428,6 +568,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.95rem;
         }
 
         /* Reviews Section */
@@ -440,6 +581,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .section-title {
@@ -458,12 +601,14 @@
             background: white;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
         }
 
         .overall-rating {
             text-align: center;
             padding-right: 1.5rem;
             border-right: 1px solid var(--border);
+            min-width: 150px;
         }
 
         .rating-value {
@@ -476,6 +621,7 @@
         .rating-stars {
             color: #FFC107;
             margin: 0.5rem 0;
+            font-size: 1.2rem;
         }
 
         .rating-count {
@@ -485,6 +631,7 @@
 
         .rating-bars {
             flex: 1;
+            min-width: 250px;
         }
 
         .rating-bar {
@@ -531,6 +678,8 @@
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .reviewer {
@@ -553,27 +702,50 @@
 
         .reviewer-info h4 {
             margin-bottom: 0.2rem;
+            font-size: 1rem;
         }
 
         .reviewer-info p {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .review-rating {
             color: #FFC107;
+            font-size: 0.9rem;
         }
 
         .review-content {
             line-height: 1.6;
             color: var(--text);
+            font-size: 0.95rem;
         }
 
         .review-date {
             margin-top: 1rem;
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: right;
+        }
+
+        /* Status Messages */
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: rgba(39, 174, 96, 0.15);
+            color: #27ae60;
+            border: 1px solid rgba(39, 174, 96, 0.3);
+        }
+
+        .alert-error {
+            background-color: rgba(231, 76, 60, 0.15);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
         }
 
         /* Responsive Design */
@@ -586,18 +758,52 @@
             .product-image {
                 height: 400px;
             }
+
+            .reviews-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .welcome-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .product-title {
+                font-size: 2.2rem;
+            }
         }
 
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
+            /* Hide desktop nav, show mobile menu toggle */
+            .nav-links {
+                display: none;
             }
 
-            .nav-links {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
+            .header-content {
+                padding-right: 0.5rem;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.3rem;
             }
 
             .rating-summary {
@@ -611,20 +817,49 @@
                 padding-right: 0;
                 padding-bottom: 1.5rem;
                 margin-bottom: 1.5rem;
+                min-width: auto;
+                width: 100%;
             }
 
-            .reviews-grid {
-                grid-template-columns: 1fr;
+            .rating-bars {
+                width: 100%;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .theme-switcher {
+                bottom: 20px;
+                right: 20px;
+                transform: scale(0.9);
             }
         }
 
         @media (max-width: 576px) {
             .welcome-card h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+
+            .welcome-card p {
+                font-size: 1rem;
+            }
+
+            .welcome-card {
+                padding: 1.5rem 1rem;
             }
 
             .product-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
+            }
+
+            .product-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .product-price {
+                font-size: 1.8rem;
             }
 
             .product-purchase {
@@ -633,29 +868,107 @@
                 gap: 1rem;
             }
 
+            .btn {
+                width: 100%;
+                padding: 0.9rem 1.5rem;
+            }
+
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.7rem;
+            }
+
+            .rating-value {
+                font-size: 2.5rem;
+            }
+
+            .product-image {
+                height: 300px;
+            }
+
             .theme-switcher {
-                bottom: 20px;
-                right: 20px;
+                bottom: 15px;
+                right: 15px;
+                transform: scale(0.8);
+                flex-direction: column;
+                border-radius: 25px;
+            }
+
+            .theme-option {
+                width: 35px;
+                height: 35px;
             }
         }
-                 /* Status Messages */
-            .alert {
-                padding: 1rem;
-                border-radius: 8px;
-                margin-bottom: 1.5rem;
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.8rem;
             }
 
-            .alert-success {
-                background-color: rgba(39, 174, 96, 0.15);
-                color: #27ae60;
-                border: 1px solid rgba(39, 174, 96, 0.3);
+            .logo-text {
+                font-size: 1.2rem;
             }
 
-            .alert-error {
-                background-color: rgba(231, 76, 60, 0.15);
-                color: #e74c3c;
-                border: 1px solid rgba(231, 76, 60, 0.3);
+            .logo-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 1.1rem;
             }
+
+            .welcome-card h1 {
+                font-size: 1.6rem;
+            }
+
+            .product-title {
+                font-size: 1.6rem;
+            }
+
+            .product-subtitle {
+                font-size: 1rem;
+            }
+
+            .feature-list li {
+                font-size: 0.9rem;
+            }
+
+            .product-meta p {
+                font-size: 0.9rem;
+            }
+
+            .mobile-nav {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .welcome-card h1 {
+                font-size: 1.4rem;
+            }
+
+            .product-title {
+                font-size: 1.4rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .rating-bars {
+                min-width: 200px;
+            }
+
+            .bar-label {
+                width: 50px;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -670,10 +983,10 @@
                     <div class="logo-text">Herbal Harmony</div>
                 </div>
 
+                <!-- Desktop Navigation -->
                 <ul class="nav-links">
                     <li><a href="{% url 'customer_dashboard' %}" class="active"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="{% url 'my_bookings' %}"><i class="fas fa-clipboard-list"></i> My Orders</a></li>
-<!--                    <li><a href="#"><i class="fas fa-shopping-cart"></i> Cart</a></li>-->
                     <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
                     <li class="user-profile" id="userProfile">
                         <div class="user-avatar">{{ user.first_name|slice:":2" }}</div>
@@ -696,20 +1009,60 @@
                         </div>
                     </li>
                 </ul>
+
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
     </header>
 
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul class="mobile-nav-links">
+            <li><a href="{% url 'customer_dashboard' %}" class="active"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="{% url 'my_bookings' %}"><i class="fas fa-clipboard-list"></i> My Orders</a></li>
+            <li><a href="#"><i class="fas fa-question-circle"></i> Help</a></li>
+        </ul>
+
+        <div class="mobile-user-profile">
+            <div class="mobile-user-info">
+                <div class="mobile-user-avatar">{{ user.first_name|slice:":2" }}</div>
+                <div class="mobile-user-name">{{ user.first_name }}</div>
+            </div>
+
+            <a href="#" class="mobile-dropdown-item">
+                <i class="fas fa-user"></i> My Profile
+            </a>
+            <a href="#" class="mobile-dropdown-item">
+                <i class="fas fa-cog"></i> Settings
+            </a>
+            <a href="#" class="mobile-dropdown-item">
+                <i class="fas fa-key"></i> Change Password
+            </a>
+            <a href="{% url 'logout_customer' %}" class="mobile-dropdown-item">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </div>
+
+    <!-- Overlay for Mobile Menu -->
+    <div class="overlay" id="overlay"></div>
+
     <!-- Main Content -->
     <main class="container">
         <!-- Welcome Section -->
-         {% if messages %}
+        {% if messages %}
             {% for message in messages %}
                 <div class="alert alert-{{ message.tags }}">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endif %}
+
         <section class="welcome-section">
             <div class="welcome-card">
                 <h1>Welcome back, {{ user.first_name }}!</h1>
@@ -912,19 +1265,79 @@
     </div>
 
     <script>
-        // Toggle profile dropdown
-        document.getElementById('userProfile').addEventListener('click', function() {
-            document.getElementById('profileDropdown').classList.toggle('active');
-        });
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('profileDropdown');
-            const profile = document.getElementById('userProfile');
-            if (!profile.contains(event.target)) {
-                dropdown.classList.remove('active');
+        mobileMenuToggle.addEventListener('click', function() {
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            body.classList.toggle('no-scroll');
+
+            // Animate hamburger to X
+            const spans = mobileMenuToggle.querySelectorAll('span');
+            if (mobileNav.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
         });
+
+        // Close mobile menu when clicking overlay
+        overlay.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            overlay.classList.remove('active');
+            body.classList.remove('no-scroll');
+
+            // Reset hamburger icon
+            const spans = mobileMenuToggle.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('.mobile-nav-links a, .mobile-dropdown-item');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                overlay.classList.remove('active');
+                body.classList.remove('no-scroll');
+
+                // Reset hamburger icon
+                const spans = mobileMenuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Toggle profile dropdown (desktop)
+        const userProfile = document.getElementById('userProfile');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        if (userProfile) {
+            userProfile.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                profileDropdown.classList.remove('active');
+            });
+
+            // Prevent dropdown from closing when clicking inside
+            profileDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
 
         // Theme switching functionality
         const themeOptions = document.querySelectorAll('.theme-option');
@@ -994,13 +1407,28 @@
             }
 
             // Add to cart functionality
-            document.querySelector('.btn-primary').addEventListener('click', function() {
-                alert('Are you sure you want to confirm your booking?\'');
-            });
+            const bookBtn = document.querySelector('.btn-primary');
+            if (bookBtn) {
+                bookBtn.addEventListener('click', function() {
+                    // This will redirect to booking page via onclick attribute
+                });
+            }
 
-            // Preload image to prevent loading issues
-            const img = new Image();
-            img.src = "https://images.unsplash.com/photo-1615634376655-8614bb7a9fd4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80";
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                // Close mobile menu if window is resized to desktop size
+                if (window.innerWidth > 768) {
+                    mobileNav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    body.classList.remove('no-scroll');
+
+                    // Reset hamburger icon
+                    const spans = mobileMenuToggle.querySelectorAll('span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
         });
     </script>
 </body>

@@ -168,19 +168,20 @@
         }
 
         /* --- Hero Section --- */
-        .hero {
-            /* REPLACED IMAGE URL HERE */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1506102383123-c8ef1e872756?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 0 20px;
-        }
+.hero {
+    /* FIXED: Using a direct, high-quality URL of a Green Himalayan Forest */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1516214104703-d870798883c5?q=80&w=1920&auto=format&fit=crop');
+
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+}
 
         .hero h2 {
             font-size: 3.5rem;
@@ -463,6 +464,9 @@
             .btn { width: 100%; display: block; margin-top: 10px; }
             .nav-links .btn { width: auto; display: inline-block; } /* Keep nav btn normal */
         }
+        html {
+    scroll-behavior: smooth;
+   }
     </style>
 </head>
 <body>
@@ -480,9 +484,8 @@
 
             <ul class="nav-links" id="nav-links">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Products</a></li>
-                <li><a href="#">Ingredients</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="#products">Products</a></li>
                 <li><a href="{% url 'Booking_page' %}" class="btn">Book Now</a></li>
             </ul>
         </div>
@@ -512,9 +515,9 @@
                         <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Pain Relief Oil">
                     </div>
                     <div class="card-body">
-                        <h3>Deep Joint Relief</h3>
+                        <h3>Deep Joint </h3>
                         <p>Infused with Wintergreen and Eucalyptus to melt away tension and stiffness.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <a href="{% url 'Booking_page' %}" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
 
@@ -526,7 +529,7 @@
                     <div class="card-body">
                         <h3>Tranquility Blend</h3>
                         <p>A soothing mix of Lavender and Chamomile to calm the mind and aid sleep.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <a href="{% url 'Booking_page' %}" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
 
@@ -538,7 +541,7 @@
                     <div class="card-body">
                         <h3>Forest Hair Vitalizer</h3>
                         <p>Rich Bhringraj oil to strengthen roots and restore natural shine.</p>
-                        <a href="#" class="btn btn-outline">View Details</a>
+                        <a href="{% url 'Booking_page' %}" class="btn btn-outline">View Details</a>
                     </div>
                 </div>
             </div>
@@ -547,7 +550,7 @@
 
     <!-- Ingredients Split Section -->
     <section class="feature-split">
-        <div class="container split-container">
+        <div class="container split-container" >
             <div class="feature-img">
                 <!-- REPLACED STATIC IMAGE WITH WORKING URL -->
                 <img src="{% static 'images/pexels-secret-spells-2150924742-31401743.jpg' %}" alt="Fresh Herbs">

@@ -12,6 +12,10 @@ def home(request):
     return render(request,"home.html")
 
 
+def about(request):
+    return render(request,"about.html")
+
+
 def Booking_page(request):
     return render(request,"Booking_page.html")
 
